@@ -1,23 +1,43 @@
 import styled from 'styled-components'
 import variaveis from '../../styles/variaveis'
+import * as enums from '../../uteis/enums/Tarefas'
 
 //Tag pode receber prioridade e/ou status
 type TagProps = {
-  prioridade?: string
-  status?: string
+  prioridade?: enums.Prioridade
+  status?: enums.Status
+  parametro: 'status' | 'prioridade'
 }
 
 function retornaCorDeFundo(props: TagProps): string {
+  /*
   //verificar se existe o status na props
   if ('status' in props) {
+    /*
     if (props.status === 'pendente') return variaveis.amarelo
-    if (props.status === 'concluída') return variaveis.verde
+    if (props.status === 'concluída') return variaveis.verde /*
+    if (props.status === enums.Status.PENDENTE) return variaveis.amarelo
+    if (props.status === enums.Status.CONCLUIDA) return variaveis.verde
     //caso não exista status mas exista prioridade na props
   } else if ('prioridade' in props) {
-    if (props.prioridade === 'urgente') return variaveis.vermelho
-    if (props.prioridade === 'importante') return variaveis.laranja
+    /*if (props.prioridade === 'urgente') return variaveis.vermelho
+    if (props.prioridade === 'importante') return variaveis.laranja/*
+    if (props.prioridade === enums.Prioridade.URGENTE) return variaveis.vermelho
+    if (props.prioridade === enums.Prioridade.IMPORTANTE)
+      return variaveis.laranja
   }
   //caso não tenha nenhuma dessas
+  return '#ccc'
+*/
+  if (props.parametro === 'status') {
+    if (props.status === enums.Status.PENDENTE) return variaveis.amarelo
+    if (props.status === enums.Status.CONCLUIDA) return variaveis.verde
+  } else {
+    if (props.prioridade === enums.Prioridade.URGENTE) return variaveis.vermelho
+    if (props.prioridade === enums.Prioridade.IMPORTANTE)
+      return variaveis.laranja
+  }
+
   return '#ccc'
 }
 
