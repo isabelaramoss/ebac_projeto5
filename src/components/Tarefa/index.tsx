@@ -1,16 +1,23 @@
 import { useState } from 'react'
 import * as S from './styles'
 
-const Tarefa = () => {
+type Props = {
+  titulo: string
+  prioridade: string
+  status: string
+  descricao: string
+}
+
+const Tarefa = ({ titulo, prioridade, status, descricao }: Props) => {
   //useState
   //Se estiver editando não mostrar os botões editar e remover e sim salvar e cancelar.
   const [estaEditando, setEstaEditando] = useState(false)
   return (
     <S.Card>
-      <S.Titulo>Nome da tarefa</S.Titulo>
-      <S.Tag>importante</S.Tag>
-      <S.Tag>pendente</S.Tag>
-      <S.Descricao />
+      <S.Titulo>{titulo}</S.Titulo>
+      <S.Tag>{prioridade}</S.Tag>
+      <S.Tag>{status}</S.Tag>
+      <S.Descricao value={descricao} />
       <S.BarraAcoes>
         {estaEditando ? (
           <>
