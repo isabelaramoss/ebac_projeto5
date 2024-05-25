@@ -11,7 +11,7 @@ const ListaDeTarefas = () => {
 
   const filtraTarefas = () => {
     let tarefasFiltradas = itens
-    if (termo) {
+    if (termo !== undefined) {
       tarefasFiltradas = tarefasFiltradas.filter(
         (item) => item.titulo.toLowerCase().search(termo.toLowerCase()) >= 0
       )

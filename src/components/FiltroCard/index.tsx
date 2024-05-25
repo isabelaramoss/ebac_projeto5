@@ -6,21 +6,30 @@ import * as enums from '../../uteis/enums/Tarefas'
 import { RootReducer } from '../../store'
 
 export type Props = {
-  contador: number
   legenda: string
   criterio: 'prioridade' | 'status' | 'todas'
   valor?: enums.Prioridade | enums.Status
 }
 
-const FiltroCard = ({ contador, legenda, criterio, valor }: Props) => {
+const FiltroCard = ({ legenda, criterio, valor }: Props) => {
   const dispatch = useDispatch()
-  const { filtro } = useSelector((state: RootReducer) => state)
+  const { filtro, tarefas } = useSelector((state: RootReducer) => state)
 
   const verificaEstadoAtivo = () => {
     const mesmoCriterio = filtro.criterio === criterio
     const mesmoValor = filtro.valor === valor
 
     return mesmoCriterio && mesmoValor
+  }
+
+  const contarTarefas = () => {
+    if (criterio === 'todas') return tarefas.itens.length
+    if (criterio === 'prioridade') {
+      return tarefas.itens.filter((item) => item.prioridade === valor).length
+    }
+    if (criterio === 'status') {
+      return tarefas.itens.filter((item) => item.status === valor).length
+    }
   }
 
   const filtrar = () => {
@@ -33,6 +42,7 @@ const FiltroCard = ({ contador, legenda, criterio, valor }: Props) => {
   }
 
   const ativo = verificaEstadoAtivo()
+  const contador = contarTarefas()
 
   return (
     <S.Card ativo={ativo} onClick={filtrar}>
