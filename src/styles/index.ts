@@ -46,7 +46,7 @@ export const Botao = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #2f3640;
+  background-color: ${variaveis.cinza};
 `
 
 export const BotaoSalvar = styled(Botao)`
