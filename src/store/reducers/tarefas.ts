@@ -11,14 +11,14 @@ const initialState: TarefasState = {
     {
       titulo: 'Estudar JavaScript',
       prioridade: enums.Prioridade.IMPORTANTE,
-      status: enums.Status.PENDENTE,
+      status: enums.Status.CONCLUIDA,
       descricao: '',
       id: 1
     },
     {
       titulo: 'Estudar TypeScript',
       prioridade: enums.Prioridade.URGENTE,
-      status: enums.Status.CONCLUIDA,
+      status: enums.Status.PENDENTE,
       descricao: 'Rever aula 2 módulo',
       id: 2
     },
@@ -61,9 +61,22 @@ const tarefasSlice = createSlice({
         //caso não exista, fazer push de nova tarefa
         state.itens.push(action.payload)
       }
+    },
+    alteraStatus: (
+      state,
+      action: PayloadAction<{ id: number; finalizado: boolean }>
+    ) => {
+      const indexDaTarefa = state.itens.findIndex(
+        (t) => t.id === action.payload.id
+      )
+      if (indexDaTarefa >= 0) {
+        state.itens[indexDaTarefa].status = action.payload.finalizado
+          ? enums.Status.CONCLUIDA
+          : enums.Status.PENDENTE
+      }
     }
   }
 })
 
-export const { remover, editar, cadastrar } = tarefasSlice.actions
+export const { remover, editar, cadastrar, alteraStatus } = tarefasSlice.actions
 export default tarefasSlice.reducer
