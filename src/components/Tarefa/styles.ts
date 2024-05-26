@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import variaveis from '../../styles/variaveis'
 import * as enums from '../../uteis/enums/Tarefas'
+import { Botao } from '../../styles'
 
 //Tag pode receber prioridade e/ou status
 type TagProps = {
@@ -90,18 +91,6 @@ export const BarraAcoes = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 16px;
 `
-export const Botao = styled.button`
-  font-size: 12px;
-  font-weight: bold;
-  color: #fff;
-  padding: 8px 12px;
-  margin-right: 8px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #2f3640;
-`
-
 export const BotaoCancelarRemover = styled(Botao)`
   background-color: ${variaveis.vermelho};
 `
